@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react'
 import { mount, ReactWrapper } from 'enzyme';
 import { FORM_KEYS } from './types';
 import { LoginForm } from '.';
@@ -49,7 +50,7 @@ describe('src/components/organisms/LoginForm', () => {
       usernameInput.simulate('change', {
         target: {
           value: 'quangphi0611'
-        } 
+        }
       })
       expect(usernameInput.getDOMNode()).toHaveValue('quangphi0611');
     });
@@ -74,17 +75,20 @@ describe('src/components/organisms/LoginForm', () => {
       expect(passwordInput.getDOMNode()).toHaveValue('');
     });
 
-    it('Should change value When user input value', () => {
+    it('Should change value When user input value', async () => {
       passwordInput.simulate('change', {
         target: {
+          name: PASSWORD_NAME,
           value: '0325400847'
         }
-      })
+      });
+      await waitFor(() => loginFormWrapper.update());
+      passwordInput = loginFormWrapper.find(`input[name="${PASSWORD_NAME}"]`);
       expect(passwordInput.getDOMNode()).toHaveValue('0325400847');
     });
   });
 
   it('Should render submit button', () => {
-    expect(loginForm.find(`button[type="submit"]`).exists()).toBeTruthy();
+    expect(loginForm.find(`button[type="submit"]`)).toHaveLength(1);
   });
 });

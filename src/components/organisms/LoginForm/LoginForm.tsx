@@ -1,10 +1,10 @@
 import {LoginFormUI} from './LoginFormUI';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormValues } from './types';
 import { useCallback } from 'react';
 
 export const LoginForm = () => {
-  const { control } = useForm<FormValues>({
+  const { register, handleSubmit } = useForm<FormValues>({
     shouldFocusError: true,
     defaultValues: {
       username: '',
@@ -12,9 +12,9 @@ export const LoginForm = () => {
     }
   });
 
-  const onSubmit = useCallback(() => {
-
+  const onSubmit: SubmitHandler<{username: string, password: string}> = useCallback((formValues, event) => {
+    console.log(formValues, event);
   }, []);
 
-  return <LoginFormUI onSubmit={onSubmit} control={control} />;
+  return <LoginFormUI onSubmit={handleSubmit(onSubmit)} register={register} />;
 }

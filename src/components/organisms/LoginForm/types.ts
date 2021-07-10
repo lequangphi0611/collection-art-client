@@ -1,4 +1,4 @@
-import { Control } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import {  FormEventHandler } from 'react';
 
 export const FORM_KEYS = Object.freeze({
@@ -12,6 +12,6 @@ export type FormValues = {
 };
 
 export type LoginFormUIProps = {
-  control: Control<FormValues>;
+  register: UseFormReturn<FormValues>['register'];
   onSubmit: FormEventHandler<HTMLFormElement>;
 }

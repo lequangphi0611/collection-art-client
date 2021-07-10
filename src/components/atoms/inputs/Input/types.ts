@@ -6,5 +6,6 @@ export type InputProps = {
   onBlur?: ReactEventHandler<HTMLInputElement>;
   value?: string;
   defaultValue?: string;
-  type?: "text" | "number" | "date" | "password" | "checkbox"; 
+  type?: "text" | "number" | "date" | "password" | "checkbox";
+  className?: string;
 }
